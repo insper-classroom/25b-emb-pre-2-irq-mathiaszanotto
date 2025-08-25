@@ -1,5 +1,3 @@
-#include "hardware/gpio.h"
-#include "pico/stdlib.h"
 #include <stdio.h>
 
 #define BTN_PIN_R 28
