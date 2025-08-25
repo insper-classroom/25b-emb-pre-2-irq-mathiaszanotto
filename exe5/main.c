@@ -20,15 +20,19 @@ int main() {
     gpio_pull_up(BTN_PIN);
 
     while (true) {
-        gpio_set_irq_enabled_with_callback(
-        BTN_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &btn_callback);
+        gpio_set_irq_enabled_with_callback(BTN_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &btn_callback);
         if (flag) {
             sleep_ms(800);
-            gpio_set_irq_enabled_with_callback(
-            BTN_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &btn_callback);
+            gpio_set_irq_enabled_with_callback(BTN_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &btn_callback);
             if (flag) {
+                while (flag) {
+                    gpio_set_irq_enabled_with_callback(BTN_PIN, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &btn_callback);
+                    if (!flag) {
+                        break;
+                    }
+                    sleep_ms(1);
+                }
                 printf("Aperto longo!\n");
-
             } else {
                 printf("Aperto curto!\n");
             }
